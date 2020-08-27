@@ -12,11 +12,15 @@ import java.util.List;
 @Transactional
 @Component
 public class UserDaoImpl implements dao {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("CRUD_task");
+
+    public EntityManager getEntityManager() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("CRUD_task");
+        return entityManagerFactory.createEntityManager();
+    }
 
     @Override
     public List<User> allUsers() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         List<User> user = entityManager.createQuery("from User",User.class)
                 .getResultList();
@@ -27,7 +31,7 @@ public class UserDaoImpl implements dao {
 
     @Override
     public void add(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
@@ -36,7 +40,7 @@ public class UserDaoImpl implements dao {
 
     @Override
     public void delete(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.remove(entityManager.merge(user));
         entityManager.getTransaction().commit();
@@ -45,7 +49,7 @@ public class UserDaoImpl implements dao {
 
     @Override
     public void edit(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.merge(user);
         entityManager.getTransaction().commit();
@@ -54,7 +58,7 @@ public class UserDaoImpl implements dao {
 
     @Override
     public User getById(int id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         User user = entityManager.find(User.class,id);
         entityManager.getTransaction().commit();
