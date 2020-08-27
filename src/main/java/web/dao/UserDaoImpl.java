@@ -1,68 +1,48 @@
 package web.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.transaction.Transactional;
+import javax.persistence.PersistenceContext;
 
 import java.util.List;
-@Transactional
+@Repository
 @Component
 public class UserDaoImpl implements dao {
+    @PersistenceContext
+    EntityManager entityManager;
 
-    public EntityManager getEntityManager() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("CRUD_task");
-        return entityManagerFactory.createEntityManager();
+    @Autowired
+    protected EntityManager getEntityManager(){
+        return this.entityManager;
     }
 
     @Override
     public List<User> allUsers() {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        List<User> user = entityManager.createQuery("from User",User.class)
+        return entityManager.createQuery("from User",User.class)
                 .getResultList();
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return user;
     }
 
     @Override
     public void add(User user) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     @Override
     public void delete(User user) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.remove(entityManager.merge(user));
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     @Override
     public void edit(User user) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.merge(user);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     @Override
     public User getById(int id) {
-        EntityManager entityManager = getEntityManager();
-        entityManager.getTransaction().begin();
-        User user = entityManager.find(User.class,id);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return user;
+        return entityManager.find(User.class,id);
     }
 }
