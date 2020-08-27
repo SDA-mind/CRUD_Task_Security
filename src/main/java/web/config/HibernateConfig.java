@@ -47,17 +47,11 @@ public class HibernateConfig {
         return factoryBean;
     }
 
-    /*
-     * Provider specific adapter.
-     */
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         return new HibernateJpaVendorAdapter();
     }
 
-    /*
-     * Here you can specify any provider specific properties.
-     */
     private Properties jpaProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
