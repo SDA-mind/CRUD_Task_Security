@@ -15,35 +15,50 @@ public class UserController {
     @Qualifier("userServiceImpl")
     @Autowired
     service userService;
+    @GetMapping(value = "/")
+    public String getHomePage() {
+        return "redirect:/admin/userlist";
+    }
 
-    @GetMapping(name = "/")
+    @GetMapping(value = "/admin/userlist")
     public String getList(Model model) {
         List<User> userList = userService.allUsers();
         model.addAttribute(userList);
-        return "userlist";
+        return "/admin/userlist";
     }
-    @GetMapping(value = "/edit/{id}")
+
+    @GetMapping(value = "/user")
+    public String userInfo( Model model) {
+        return "user";
+    }
+
+    @GetMapping(value = "/admin/edit/{id}")
     public String editPage(@PathVariable("id") int id, Model model) {
         User editUser = userService.getById(id);
         model.addAttribute("editUser",editUser);
-        return "edit";
+        return "/admin/edit";
     }
 
-    @PostMapping(value = "/edit")
+    @GetMapping(value = "/admin/add")
+    public String addPage() {
+        return "/admin/add";
+    }
+
+    @PostMapping(value = "/admin/edit")
     public String edit(@ModelAttribute("editUser") User user) {
         userService.edit(user);
-        return "redirect:/";
+        return "redirect:/admin/userlist";
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/admin/add")
     public String add(User user) {
         userService.add(user);
-        return "redirect:/";
+        return "redirect:/admin/userlist";
     }
 
-    @PostMapping(value = "/delete")
+    @PostMapping(value = "/admin/delete")
     public String delete(User user) {
         userService.delete(user);
-        return "redirect:/";
+        return "redirect:/admin/userlist";
     }
 }

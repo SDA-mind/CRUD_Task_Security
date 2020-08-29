@@ -2,6 +2,7 @@ package web.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import web.model.Role;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -43,5 +44,10 @@ public class UserDaoImpl implements dao {
     @Override
     public User getById(int id) {
         return entityManager.find(User.class,id);
+    }
+
+    @Override
+    public User getByName(String name) {
+        return entityManager.find(User.class,name);
     }
 }

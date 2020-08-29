@@ -10,19 +10,28 @@
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>First Name</th>
             <th>Last Name</th>
             <th>Date</th>
-            <th>Operations</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Roles</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <tr th:each="User : ${userList}">
             <td th:utext="${User.id}">...</td>
-            <td th:utext="${User.name}">...</td>
+            <td th:utext="${User.firstName}">...</td>
             <td th:utext="${User.lastName}">...</td>
             <td th:utext="${User.date}">...</td>
+            <td th:utext="${User.name}">...</td>
+            <td th:utext="${User.password}">...</td>
+            <td th:utext="${User.roles.toString()}">...</td>
             <td>
-                <a href="edit.html" th:href="@{/edit/{userId}(userId=${User.id})}">edit</a>
-                <form action="/delete" method="post">
+                <a href="edit.html" th:href="@{/admin/edit/{userId}(userId=${User.id})}">edit</a>
+            </td>
+            <td>
+                <form action="/admin/delete" method="post">
                     <input type="hidden" name="id" th:value="${User.id}">
                     <input type="submit" name="id" value="delete">
                 </form>
@@ -30,15 +39,7 @@
         </tr>
     </table>
 </div>
-<h2>Add</h2>
-<form action="/add" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name">
-    <label for="lastName">Last name</label>
-    <input type="text" name="lastName" id="lastName">
-    <label for="date">Date</label>
-    <input type="text" name="date" id="date">
-    <input type="submit" value="Add user">
-</form>
+<h2>ADD</h2>
+<a href="add.html" th:href="@{/admin/add}">ADD</a>
 </body>
 </html>
