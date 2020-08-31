@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = { "classpath:hib.properties" })
+@PropertySource(value = {"classpath:hib.properties"})
 
 public class HibernateConfig {
 

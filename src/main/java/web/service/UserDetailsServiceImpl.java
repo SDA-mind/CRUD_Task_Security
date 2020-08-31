@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import web.dao.dao;
+import web.model.User;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

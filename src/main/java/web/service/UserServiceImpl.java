@@ -4,19 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.UserDaoImpl;
 import web.dao.dao;
-import web.model.Role;
 import web.model.User;
-
-import java.util.Collections;
 import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements service {
     @Qualifier("userDaoImpl")
     @Autowired
     dao userDao;
+
     @Override
     public List<User> allUsers() {
         return userDao.allUsers();

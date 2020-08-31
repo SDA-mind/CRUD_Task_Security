@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,15 +7,13 @@
 <body>
 <h2>Add</h2>
 <form action="/admin/add" method="POST">
-    <label for="firstName">Name</label>
+    <label for="firstName">First Name</label>
     <input type="text" name="firstName" id="firstName">
     <label for="lastName">Last name</label>
     <input type="text" name="lastName" id="lastName">
     <label for="date">Date</label>
     <input type="text" name="date" id="date">
-    <label for="roles">Roles</label>
-    <input type="text" name="role" id="roles">
-    <label for="password">Name</label>
+    <label for="name">Name</label>
     <input type="text" name="name" id="name">
     <label for="password">Password</label>
     <input type="text" name="password" id="password">

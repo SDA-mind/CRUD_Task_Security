@@ -10,9 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    static int count = 0;
+    @Column(name = "user_id")
     private Integer id;
     @Column(name = "first_name")
     private String firstName;
@@ -20,13 +19,16 @@ public class User implements UserDetails {
     private String lastName;
     @Column(name = "date")
     private String date;
-    @Column(name = "name")
+    @Id
+    @Column(name = "name", length = 20)
     private String name;
     @Column(name = "password")
     private String password;
-//    @JoinTable(name = "roles", joinColumns = @JoinColumn(name ="user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
 
@@ -34,12 +36,14 @@ public class User implements UserDetails {
     }
 
     public User(String firstName, String lastName, String date, String name, String password, Set<Role> roles) {
+        this.id = count;
         this.firstName = firstName;
         this.lastName = lastName;
         this.date = date;
+        this.name = name;
         this.password = password;
         this.roles = roles;
-        this.name = name;
+        count++;
     }
 
     public void setId(Integer id) {
@@ -119,12 +123,6 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
-    }
-
-    public void setRoles(String ... tempRoles) {
-        for(String s: tempRoles) {
-            roles.add(new Role(s));
-        }
     }
 
     public void setPassword(String password) {
