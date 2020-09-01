@@ -10,7 +10,6 @@
     <h2>User list</h2>
     <table border="1">
         <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Date</th>
@@ -20,7 +19,6 @@
             <th>Delete</th>
         </tr>
         <tr th:each="User : ${userList}">
-            <td th:utext="${User.id}">...</td>
             <td th:utext="${User.firstName}">...</td>
             <td th:utext="${User.lastName}">...</td>
             <td th:utext="${User.date}">...</td>
