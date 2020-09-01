@@ -38,8 +38,4 @@ public class RoleDao {
     public Role getById(Long id) {
         return entityManager.find(Role.class, id);
     }
-
-    public Role getByName(String role) {
-        return entityManager.find(Role.class, role);
-    }
 }

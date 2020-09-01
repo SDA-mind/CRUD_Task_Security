@@ -18,6 +18,7 @@
             <th>Date</th>
             <th>Name</th>
             <th>Password</th>
+            <th>Roles</th>
         </tr>
         <tr>
             <td th:utext="${User.firstName}">...</td>
@@ -25,6 +26,13 @@
             <td th:utext="${User.date}">...</td>
             <td th:utext="${User.name}">...</td>
             <td th:utext="${User.password}">...</td>
+            <td>
+                <table>
+                    <tr th:each="Role : ${User.roles}" >
+                        <td th:utext="${Role.role}"></td>
+                    </tr>
+                </table>
+            </td>
         </tr>
     </table>
 </div>

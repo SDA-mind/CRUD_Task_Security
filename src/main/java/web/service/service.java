@@ -18,4 +18,8 @@ public interface service {
     User getById(int id);
 
     User getByName(String name);
+
+    void addRole(String name, Long id);
+
+    void deleteRole(String name,Long id);
 }

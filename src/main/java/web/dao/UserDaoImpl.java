@@ -2,23 +2,17 @@ package web.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import web.model.Role;
 import web.model.User;
-import web.service.RoleService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.util.Collections;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements dao {
     @PersistenceContext
     EntityManager entityManager;
-
-    @Autowired
-    RoleService roleService;
 
     @Autowired
     protected EntityManager getEntityManager() {
@@ -33,7 +27,6 @@ public class UserDaoImpl implements dao {
 
     @Override
     public void add(User user) {
-        user.setRoles(Collections.singleton(roleService.getById(2L)));
         entityManager.persist(user);
     }
 

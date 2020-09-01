@@ -15,8 +15,10 @@
             <th>Date</th>
             <th>Name</th>
             <th>Password</th>
+            <th>Roles</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Add roles</th>
         </tr>
         <tr th:each="User : ${userList}">
             <td th:utext="${User.firstName}">...</td>
@@ -25,10 +27,37 @@
             <td th:utext="${User.name}">...</td>
             <td th:utext="${User.password}">...</td>
             <td>
+                <table>
+                    <tr th:each="Role : ${User.roles}" >
+                        <td th:utext="${Role.role}"></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
                 <a href="edit.html" th:href="@{/admin/edit/{userName}(userName=${User.name})}">edit</a>
             </td>
             <td>
                 <a href="/admin/delete/" th:href="@{/admin/delete/{name}(name=${User.name})}">delete</a>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <a href="/admin/editRoleAd/" th:href="@{/admin/editRoleAd/{userName}(userName=${User.name})}">add_admin</a>
+                        </td>
+                        <td>
+                            <a href="/admin/editRoleAn/" th:href="@{/admin/editRoleAn/{userName}(userName=${User.name})}">add_annon</a>
+                        </td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <a href="/admin/deleteRoleAd/" th:href="@{/admin/editRoleAd/{userName}(userName=${User.name})}">delete_admin</a>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <a href="/admin/deleteRoleAn/" th:href="@{/admin/editRoleAn/{userName}(userName=${User.name})}">delete_annon</a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                </table>
             </td>
         </tr>
     </table>

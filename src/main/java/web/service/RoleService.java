@@ -33,8 +33,4 @@ public class RoleService {
     public Role getById(Long id) {
         return roleDao.getById(id);
     }
-
-    public Role getByName(String role) {
-        return roleDao.getByName(role);
-    }
 }

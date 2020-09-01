@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import web.model.User;
+import web.service.RoleService;
 import web.service.service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -18,6 +20,8 @@ public class AdminController {
     @Qualifier("userServiceImpl")
     @Autowired
     service userService;
+    @Autowired
+    RoleService roleService;
 
     @GetMapping(value = "/admin/userlist")
     public String getList(Model model) {
@@ -38,7 +42,7 @@ public class AdminController {
         return "/admin/add";
     }
 
-    @PostMapping(value = "/admin/edit")
+    @GetMapping(value = "/admin/edit")
     public String edit(@ModelAttribute("editUser") User user) {
         userService.edit(user);
         return "redirect:/admin/userlist";
@@ -56,4 +60,29 @@ public class AdminController {
         userService.delete(user);
         return "redirect:/admin/userlist";
     }
+
+    @GetMapping(value = "/admin/editRoleAd/{name}")
+    public String setRoleAdmin(@PathVariable("name") String name) {
+        userService.addRole(name,1L);
+        return "redirect:/admin/userlist";
+    }
+
+    @GetMapping(value = "/admin/editRoleAn/{name}")
+    public String setRoleAnnon(@PathVariable("name") String name) {
+        userService.addRole(name,3L);
+        return "redirect:/admin/userlist";
+    }
+
+//    @GetMapping(value = "/admin/deleteRoleAd/{name}")
+//    public String deleteRoleAdmin(@PathVariable("name") String name) {
+//        userService.deleteRole(name,1L);
+//        return "redirect:/admin/userlist";
+//    }
+//
+//    @GetMapping(value = "/admin/deleteRoleAn/{name}")
+//    public String deleteRoleAnnon(@PathVariable("name") String name) {
+//        userService.deleteRole(name,3L);
+//        return "redirect:/admin/userlist";
+//    }
+
 }

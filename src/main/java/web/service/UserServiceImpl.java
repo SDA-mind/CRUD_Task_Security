@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.dao;
+import web.model.Role;
 import web.model.User;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,6 +17,8 @@ public class UserServiceImpl implements service {
     @Qualifier("userDaoImpl")
     @Autowired
     dao userDao;
+    @Autowired
+    RoleService roleService;
 
     @Override
     public List<User> allUsers() {
@@ -22,6 +27,7 @@ public class UserServiceImpl implements service {
 
     @Override
     public void add(User user) {
+        user.setRoles(Collections.singleton(roleService.getById(2L)));
         userDao.add(user);
     }
 
@@ -43,5 +49,19 @@ public class UserServiceImpl implements service {
     @Override
     public User getByName(String name) {
         return userDao.getByName(name);
+    }
+
+    @Override
+    public void addRole(String name,Long id) {
+        User user = userDao.getByName(name);
+        user.getRoles().add(roleService.getById(id));
+        userDao.edit(user);
+    }
+
+    @Override
+    public void deleteRole(String name,Long id) {
+        User user = userDao.getByName(name);
+        user.getRoles().remove(roleService.getById(id));
+        userDao.edit(user);
     }
 }
