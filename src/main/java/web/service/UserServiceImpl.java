@@ -52,14 +52,14 @@ public class UserServiceImpl implements service {
     }
 
     @Override
-    public void addRole(String name,Long id) {
+    public void addRole(String name, Long id) {
         User user = userDao.getByName(name);
         user.getRoles().add(roleService.getById(id));
         userDao.edit(user);
     }
 
     @Override
-    public void deleteRole(String name,Long id) {
+    public void deleteRole(String name, Long id) {
         User user = userDao.getByName(name);
         user.getRoles().remove(roleService.getById(id));
         userDao.edit(user);

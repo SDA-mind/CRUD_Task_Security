@@ -63,26 +63,26 @@ public class AdminController {
 
     @GetMapping(value = "/admin/editRoleAd/{name}")
     public String setRoleAdmin(@PathVariable("name") String name) {
-        userService.addRole(name,1L);
+        userService.addRole(name, 1L);
         return "redirect:/admin/userlist";
     }
 
     @GetMapping(value = "/admin/editRoleAn/{name}")
     public String setRoleAnnon(@PathVariable("name") String name) {
-        userService.addRole(name,3L);
+        userService.addRole(name, 3L);
         return "redirect:/admin/userlist";
     }
 
-//    @GetMapping(value = "/admin/deleteRoleAd/{name}")
-//    public String deleteRoleAdmin(@PathVariable("name") String name) {
-//        userService.deleteRole(name,1L);
-//        return "redirect:/admin/userlist";
-//    }
-//
-//    @GetMapping(value = "/admin/deleteRoleAn/{name}")
-//    public String deleteRoleAnnon(@PathVariable("name") String name) {
-//        userService.deleteRole(name,3L);
-//        return "redirect:/admin/userlist";
-//    }
+    @GetMapping(value = "/admin/deleteRoleAd/{name}")
+    public String deleteRoleAdmin(@PathVariable("name") String name) {
+        userService.deleteRole(name, 1L);
+        return "redirect:/admin/userlist";
+    }
+
+    @GetMapping(value = "/admin/deleteRoleAn/{name}")
+    public String deleteRoleAnnon(@PathVariable("name") String name) {
+        userService.deleteRole(name, 3L);
+        return "redirect:/admin/userlist";
+    }
 
 }
