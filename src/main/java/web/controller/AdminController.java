@@ -37,15 +37,15 @@ public class AdminController {
         return "/admin/edit";
     }
 
-    @GetMapping(value = "/admin/add")
-    public String addPage() {
-        return "/admin/add";
-    }
-
-    @GetMapping(value = "/admin/edit")
+    @PostMapping(value = "/admin/edit")
     public String edit(@ModelAttribute("editUser") User user) {
         userService.edit(user);
         return "redirect:/admin/userlist";
+    }
+
+    @GetMapping(value = "/admin/add")
+    public String addPage() {
+        return "/admin/add";
     }
 
     @PostMapping(value = "/admin/add")
