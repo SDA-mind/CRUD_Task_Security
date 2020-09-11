@@ -10,9 +10,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements dao {
+public class UserUserDaoImpl implements UserDao {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
     protected EntityManager getEntityManager() {

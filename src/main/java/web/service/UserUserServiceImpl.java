@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.dao;
-import web.model.Role;
+import web.dao.UserDao;
 import web.model.User;
 
 import java.util.Collections;
@@ -13,12 +12,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements service {
-    @Qualifier("userDaoImpl")
+public class UserUserServiceImpl implements UserService {
+    @Qualifier("userUserDaoImpl")
     @Autowired
-    dao userDao;
+    private UserDao userDao;
     @Autowired
-    RoleService roleService;
+    private RoleService roleServiceImpl;
 
     @Override
     public List<User> allUsers() {
@@ -27,7 +26,7 @@ public class UserServiceImpl implements service {
 
     @Override
     public void add(User user) {
-        user.setRoles(Collections.singleton(roleService.getById(2L)));
+        user.setRoles(Collections.singleton(roleServiceImpl.getById(2L)));
         userDao.add(user);
     }
 
@@ -54,14 +53,14 @@ public class UserServiceImpl implements service {
     @Override
     public void addRole(String name, Long id) {
         User user = getByName(name);
-        user.getRoles().add(roleService.getById(id));
+        user.getRoles().add(roleServiceImpl.getById(id));
         edit(user);
     }
 
     @Override
     public void deleteRole(String name, Long id) {
         User user = getByName(name);
-        user.getRoles().remove(roleService.getById(id));
+        user.getRoles().remove(roleServiceImpl.getById(id));
         edit(user);
     }
 }

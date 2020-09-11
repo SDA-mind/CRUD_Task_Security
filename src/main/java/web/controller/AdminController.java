@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import web.model.User;
-import web.service.RoleService;
-import web.service.service;
+import web.service.RoleServiceImpl;
+import web.service.UserService;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
 public class AdminController {
-    @Qualifier("userServiceImpl")
+    @Qualifier("userUserServiceImpl")
     @Autowired
-    service userService;
+    private UserService userService;
     @Autowired
-    RoleService roleService;
+    private RoleServiceImpl roleServiceImpl;
 
     @GetMapping(value = "/admin/userlist")
     public String getList(Model model) {

@@ -1,4 +1,4 @@
-package web.dao;
+package web.service;
 
 import org.springframework.stereotype.Component;
 import web.model.User;
@@ -6,7 +6,7 @@ import web.model.User;
 import java.util.List;
 
 @Component
-public interface dao {
+public interface UserService {
     List<User> allUsers();
 
     void add(User user);
@@ -18,4 +18,8 @@ public interface dao {
     User getById(int id);
 
     User getByName(String name);
+
+    void addRole(String name, Long id);
+
+    void deleteRole(String name,Long id);
 }
