@@ -1,36 +1,19 @@
 package web.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import web.dao.RoleDao;
+import org.springframework.stereotype.Component;
 import web.model.Role;
 
 import java.util.List;
 
-@Service
-@Transactional
-public class RoleService {
-    @Autowired
-    RoleDao roleDao;
+@Component
+public interface RoleService {
+    List<Role> allRoles();
 
-    public List<Role> allRoles() {
-        return roleDao.allRoles();
-    }
+    void add(Role role);
 
-    public void add(Role role) {
-        roleDao.add(role);
-    }
+    void delete(Role role);
 
-    public void delete(Role role) {
-        roleDao.delete(role);
-    }
+    void edit(Role role);
 
-    public void edit(Role role) {
-        roleDao.edit(role);
-    }
-
-    public Role getById(Long id) {
-        return roleDao.getById(id);
-    }
+    Role getById(Long id);
 }

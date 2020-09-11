@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserUserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -36,8 +36,17 @@ public class UserUserDaoImpl implements UserDao {
     }
 
     @Override
-    public void edit(User user) {
-        entityManager.merge(user);
+    public void edit(User user,String id) {
+        entityManager.createNativeQuery("update users set first_name= :firstname, last_name= :lastname," +
+                "date= :date, name= :name, password= :pass where name= :id")
+                .setParameter("id",id)
+                .setParameter("firstname",user.getFirstName())
+                .setParameter("lastname",user.getLastName())
+                .setParameter("date",user.getDate())
+                .setParameter("name",user.getName())
+                .setParameter("pass",user.getPassword())
+                .executeUpdate();
+
     }
 
     @Override

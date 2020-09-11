@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import web.model.User;
-import web.service.RoleServiceImpl;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.util.List;
 
 @Controller
 public class AdminController {
-    @Qualifier("userUserServiceImpl")
+    @Qualifier("userServiceImpl")
     @Autowired
     private UserService userService;
+    @Qualifier("roleServiceImpl")
     @Autowired
-    private RoleServiceImpl roleServiceImpl;
+    private RoleService roleServiceImpl;
 
     @GetMapping(value = "/admin/userlist")
     public String getList(Model model) {
@@ -38,7 +39,7 @@ public class AdminController {
 
     @PostMapping(value = "/admin/edit")
     public String edit(@ModelAttribute("editUser") User user) {
-        userService.edit(user);
+        userService.edit(user,user.getName());
         return "redirect:/admin/userlist";
     }
 

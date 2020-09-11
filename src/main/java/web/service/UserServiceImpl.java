@@ -12,8 +12,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserUserServiceImpl implements UserService {
-    @Qualifier("userUserDaoImpl")
+public class UserServiceImpl implements UserService {
+    @Qualifier("userDaoImpl")
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -36,8 +36,8 @@ public class UserUserServiceImpl implements UserService {
     }
 
     @Override
-    public void edit(User user) {
-        userDao.edit(user);
+    public void edit(User user,String id) {
+        userDao.edit(user,id);
     }
 
     @Override
@@ -54,13 +54,13 @@ public class UserUserServiceImpl implements UserService {
     public void addRole(String name, Long id) {
         User user = getByName(name);
         user.getRoles().add(roleServiceImpl.getById(id));
-        edit(user);
+        edit(user,user.getName());
     }
 
     @Override
     public void deleteRole(String name, Long id) {
         User user = getByName(name);
         user.getRoles().remove(roleServiceImpl.getById(id));
-        edit(user);
+        edit(user,user.getName());
     }
 }

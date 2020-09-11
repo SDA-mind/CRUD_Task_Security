@@ -1,41 +1,19 @@
 package web.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import web.model.Role;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
-public class RoleDao {
-    @PersistenceContext
-    EntityManager entityManager;
+@Component
+public interface RoleDao {
+    List<Role> allRoles();
 
-    @Autowired
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
-    }
+    void add(Role role);
 
-    public List<Role> allRoles() {
-        return entityManager.createQuery("from roles", Role.class)
-                .getResultList();
-    }
+    void delete(Role role);
 
-    public void add(Role role) {
-        entityManager.persist(role);
-    }
+    void edit(Role role);
 
-    public void delete(Role role) {
-        entityManager.remove(entityManager.merge(role));
-    }
-
-    public void edit(Role role) {
-        entityManager.merge(role);
-    }
-
-    public Role getById(Long id) {
-        return entityManager.find(Role.class, id);
-    }
+    Role getById(Long id);
 }

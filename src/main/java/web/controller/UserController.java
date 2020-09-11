@@ -12,7 +12,7 @@ import web.service.UserService;
 
 @Controller
 public class UserController {
-    @Qualifier("userUserServiceImpl")
+    @Qualifier("userServiceImpl")
     @Autowired
     private UserService userService;
 
